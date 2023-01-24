@@ -1,8 +1,11 @@
-﻿namespace ChemistWareHouse.Pizza.Api.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ChemistWareHouse.Pizza.Api.Models;
 
 public class Location
 {
     public int Id { get; set; }
+    [Required]
     public string LocationName { get; set; }
 }
 

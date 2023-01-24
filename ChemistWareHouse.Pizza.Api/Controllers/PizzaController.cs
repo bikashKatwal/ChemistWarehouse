@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace ChemistWareHouse.Pizza.Api.Controllers
 {
-    [Route("[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class PizzaController : ControllerBase
     {
@@ -17,21 +17,21 @@ namespace ChemistWareHouse.Pizza.Api.Controllers
             _pizzaService = pizzaService;
         }
 
-        [HttpGet(Name = "GetLocation")]
-        public IActionResult GetLocation()
+        [HttpGet("GetLocations", Name = "GetLocations")]
+        public IActionResult GetLocations()
         {
             var locations = _pizzaService.GetLocations();
             return Ok(locations);
         }
 
-        [HttpGet(Name = "GetLocationPizza")]
+        [HttpGet("GetLocationPizza", Name = "GetLocationPizza")]
         public IActionResult GetLocationPizza()
         {
             var pizzas = _pizzaService.GetLocationPizzas();
             return Ok(pizzas);
         }
 
-        [HttpPost(Name ="AddPizzariallocation")]
+        [HttpPost("AddPizzaria", Name = "AddPizzaria")]
         public IActionResult AddPizzaria(Location location)
         {
             _pizzaService.AddPizzaria(location);
