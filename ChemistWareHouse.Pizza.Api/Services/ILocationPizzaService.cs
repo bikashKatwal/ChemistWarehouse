@@ -6,6 +6,6 @@ public interface ILocationPizzaService
 {
     void AddPizzaria(Location location);
     List<Location> GetLocations();
-    List<LocationPizza> GetLocationPizzas();
+    LocationPizzaMenu GetPizzaMenuById(int Id);
 }
 

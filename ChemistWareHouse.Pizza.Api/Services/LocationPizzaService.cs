@@ -9,53 +9,174 @@ public class LocationPizzaService : ILocationPizzaService
         var locations = PizzariaLocation.Locations;
         var pizzariaLocation = new Location
         {
-            Id = locations[locations.Count() - 1].Id + 1,
+            LocationId = locations[locations.Count() - 1].LocationId + 1,
             LocationName = location.LocationName
         };
         locations.Add(pizzariaLocation);
     }
 
-    public List<LocationPizza> GetLocationPizzas()
+    public LocationPizzaMenu? GetPizzaMenuById(int LocationId)
     {
-        var pizzas = new List<LocationPizza>
+        var locationPizzaMenu = new List<LocationPizzaMenu>
         {
-            new LocationPizza{
-                Id= 1,
-                LocationName="Preston",
+            new LocationPizzaMenu {
+                LocationId= PizzariaLocation.Locations[0].LocationId,
+                LocationName=PizzariaLocation.Locations[0].LocationName,
                 Pizzas = new List<Models.Pizza>
                 {
                     new Models.Pizza{
-                        Id= 1,
+                        PizzaId= 1,
                         PizzaType="Capricciosa",
                         Price=20,
                         Ingredients= new List<Ingredient>{
                             new Ingredient
                             {
-                                Id= 1,
-                                Name="Cheese"
+                                IngredientId= 1,
+                                IngredientName="Cheese"
                             },
                              new Ingredient
                             {
-                                Id= 2,
-                                Name="Ham"
+                                IngredientId= 2,
+                                IngredientName="Ham"
                             },
                               new Ingredient
                             {
-                                Id= 3,
-                                Name="Mushrooms"
+                                IngredientId= 3,
+                                IngredientName="Mushrooms"
                             },
                                new Ingredient
                             {
-                                Id= 4,
-                                Name="Olives"
+                                IngredientId= 4,
+                                IngredientName="Olives"
                             },
                         }
+                    },
+                    new Models.Pizza{
+                        PizzaId= 2,
+                        PizzaType="Mexicana",
+                        Price=18,
+                        Ingredients= new List<Ingredient>{
+                            new Ingredient
+                            {
+                                IngredientId= 1,
+                                IngredientName="Cheese"
+                            },
+                            new Ingredient
+                            {
+                                IngredientId= 2,
+                                IngredientName="Salami"
+                            },
+                            new Ingredient
+                            {
+                                IngredientId= 3,
+                                IngredientName="Capsicum"
+                            },
+                            new Ingredient
+                            {
+                                IngredientId= 4,
+                                IngredientName="Chilli"
+                            },
+                        }
+                    },
+                    new Models.Pizza{
+                        PizzaId= 3,
+                        PizzaType="Margherita",
+                        Price=22,
+                        Ingredients= new List<Ingredient>{
+                            new Ingredient
+                            {
+                                IngredientId= 1,
+                                IngredientName="Cheese"
+                            },
+                            new Ingredient
+                            {
+                                IngredientId= 2,
+                                IngredientName="Spinach"
+                            },
+                            new Ingredient
+                            {
+                                IngredientId= 3,
+                                IngredientName="Ricotta"
+                            },
+                            new Ingredient
+                            {
+                                IngredientId= 4,
+                                IngredientName="Cherry Tomatoes"
+                            },
+                        }
+                    },
 
+                }
+            },
+            new LocationPizzaMenu{
+                LocationId= PizzariaLocation.Locations[1].LocationId,
+                LocationName=PizzariaLocation.Locations[1].LocationName,
+                Pizzas = new List<Models.Pizza>
+                {
+                    new Models.Pizza{
+                        PizzaId= 1,
+                        PizzaType="Capricciosa",
+                        Price=25,
+                        Ingredients= new List<Ingredient>{
+                            new Ingredient
+                            {
+                                IngredientId= 1,
+                                IngredientName="Cheese"
+                            },
+                             new Ingredient
+                            {
+                                IngredientId= 2,
+                                IngredientName="Ham"
+                            },
+                              new Ingredient
+                            {
+                                IngredientId= 3,
+                                IngredientName="Mushrooms"
+                            },
+                               new Ingredient
+                            {
+                                IngredientId= 4,
+                                IngredientName="Olives"
+                            },
+                        }
+                    },
+                    new Models.Pizza{
+                        PizzaId= 2,
+                        PizzaType="Vegetarian",
+                        Price=17,
+                        Ingredients= new List<Ingredient>{
+                            new Ingredient
+                            {
+                                IngredientId= 1,
+                                IngredientName="Cheese"
+                            },
+                             new Ingredient
+                            {
+                                IngredientId= 2,
+                                IngredientName="Mushrooms"
+                            },
+                              new Ingredient
+                            {
+                                IngredientId= 3,
+                                IngredientName="Capsicum"
+                            },
+                            new Ingredient
+                            {
+                                IngredientId= 4,
+                                IngredientName="Onion"
+                            },
+                            new Ingredient
+                            {
+                                IngredientId= 5,
+                                IngredientName="Olives"
+                            },
+                        }
                     }
                 }
             }
         };
-        return pizzas;
+        var pizza = locationPizzaMenu.FirstOrDefault(x => x.LocationId == LocationId);
+        return pizza;
     }
 
     public List<Location> GetLocations()

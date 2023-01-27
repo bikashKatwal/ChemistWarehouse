@@ -24,14 +24,14 @@ namespace ChemistWareHouse.Pizza.Api.Controllers
             return Ok(locations);
         }
 
-        [HttpGet("GetLocationPizza", Name = "GetLocationPizza")]
-        public IActionResult GetLocationPizza()
+        [HttpGet("GetPizzaMenuById/{id}", Name = "GetPizzaMenuById")]
+        public IActionResult GetPizzaMenuById(int id)
         {
-            var pizzas = _pizzaService.GetLocationPizzas();
+            var pizzas = _pizzaService.GetPizzaMenuById(id);
             return Ok(pizzas);
         }
 
-        [HttpPost("AddPizzaria", Name = "AddPizzaria")]
+        [HttpPost("CreatePizzaria", Name = "CreatePizzaria")]
         public IActionResult AddPizzaria(Location location)
         {
             _pizzaService.AddPizzaria(location);

@@ -4,8 +4,8 @@
     {
         public static List<Location> Locations = new()
         {
-           new Location{Id=1, LocationName="Preston Pizzeria" },
-           new Location{Id=2, LocationName="Southbank Pizzeria"},
+           new Location{LocationId=1, LocationName="Preston Pizzeria" },
+           new Location{LocationId=2, LocationName="Southbank Pizzeria"},
         };
        
     }

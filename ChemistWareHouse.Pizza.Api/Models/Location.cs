@@ -4,14 +4,14 @@ namespace ChemistWareHouse.Pizza.Api.Models;
 
 public class Location
 {
-    public int Id { get; set; }
+    public int LocationId { get; set; }
     [Required]
-    public string LocationName { get; set; }
+    public string LocationName { get; set; } = String.Empty;
 }
 
 public class Pizza
 {
-    public int Id { get; set; }
+    public int PizzaId { get; set; }
     public string? PizzaType { get; set; }
     public decimal Price { get; set; }
     public List<Ingredient>? Ingredients { get; set; }
@@ -19,14 +19,16 @@ public class Pizza
 
 public class Ingredient
 {
-    public int Id { get; set; }
-    public string Name { get; set; } = String.Empty;
+    public int IngredientId { get; set; }
+    public string IngredientName { get; set; } = String.Empty;
 }
 
-public class LocationPizza : Location
+public class LocationPizzaMenu : Location
 {
     public List<Pizza>? Pizzas { get; set; }
 }
+
+
 
 
 
