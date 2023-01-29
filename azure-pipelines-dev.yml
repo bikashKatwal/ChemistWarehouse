@@ -41,3 +41,39 @@ steps:
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
+
+### Deploy React Project ####
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    command: 'install'
+    workingDir: '$(System.DefaultWorkingDirectory)/ChemistWareHouse.Pizza.UI'
+    verbose: false 
+
+- task: Npm@1
+  displayName: 'npm run build'
+  inputs:
+    command: 'custom'
+    workingDir: '$(System.DefaultWorkingDirectory)/ChemistWareHouse.Pizza.UI'
+    customCommand: 'run build'
+    verbose: false
+
+- task: AzureCLI@2
+  displayName: "Admin Web - Clean Azure Blob before copy"
+  inputs:
+    # azureSubscription: $(azureSubscription)
+    scriptType: ps
+    scriptLocation: "inlineScript"
+    inlineScript: "az storage blob delete-batch --account-name chemistwarehouse --source '$web'"
+
+- task: AzureFileCopy@3
+  displayName: "Admin Web - Deploy"
+  inputs:
+    SourcePath: "$(System.DefaultWorkingDirectory)/ChemistWareHouse.Pizza.UI/build"
+    # azureSubscription: $(azureSubscription)
+    Destination: "AzureBlob"
+    storage: "chemistwarehouse"
+    ContainerName: "$web"
+
+
+### End React Project ####
