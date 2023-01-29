@@ -19,7 +19,7 @@ namespace ChemistWareHouse.Pizza.Api.Models
                     {
                         new PizzaMenuItem{
                             PizzaId= 1,
-                            PizzaType="Capricciosa Pipeline Check",
+                            PizzaType="Capricciosa",
                             Price=20,
                             LocationId=Locations[0].LocationId,
                             Ingredients= new List<Ingredient>{
