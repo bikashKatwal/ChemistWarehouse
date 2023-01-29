@@ -57,7 +57,9 @@ const Admin = () => {
             <Item sx={{ textAlign: "left" }}>
               <SelectMenu
                 locations={locations}
-                location={location}
+                location={
+                  location || (locations && locations[0].locationId) || ""
+                }
                 handleChange={handleChange}
               />
 
