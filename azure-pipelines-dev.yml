@@ -22,7 +22,7 @@ steps:
     publishWebProjects: true
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: '<Azure service connection>'
+    azureSubscription: $(AzureSubscription)
     appType: 'webAppLinux'
     appName: 'bikash-technical'
     package: '$(System.DefaultWorkingDirectory)/**/*.zip'
@@ -46,7 +46,7 @@ steps:
 - task: AzureCLI@2
   displayName: "Admin Web - Clean Azure Blob before copy"
   inputs:
-    # azureSubscription: $(azureSubscription)
+    azureSubscription: $(AzureSubscription)
     scriptType: ps
     scriptLocation: "inlineScript"
     inlineScript: "az storage blob delete-batch --account-name chemistwarehouse --source '$web'"
@@ -55,7 +55,7 @@ steps:
   displayName: "Admin Web - Deploy"
   inputs:
     SourcePath: "$(System.DefaultWorkingDirectory)/ChemistWareHouse.Pizza.UI/build"
-    # azureSubscription: $(azureSubscription)
+    azureSubscription: $(AzureSubscription)
     Destination: "AzureBlob"
     storage: "chemistwarehouse"
     ContainerName: "$web"
