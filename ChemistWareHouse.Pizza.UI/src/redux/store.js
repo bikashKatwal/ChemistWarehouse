@@ -5,7 +5,7 @@ import rootReducer from "./rootReducer";
 
 import { composeWithDevTools } from "redux-devtools-extension";
 
-const middlewares = [thunk, logger];
+const middlewares = [thunk];
 
 const composeEnhancers = composeWithDevTools({ trace: true, traceLimit: 25 });
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(...middlewares)));

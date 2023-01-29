@@ -1,7 +1,7 @@
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 
-const MainLayout = ({ children, sx = {} }) => {
+const MainLayout = ({ children, sx = {}, elevation = 0 }) => {
   return (
     <Box
       sx={{
@@ -15,7 +15,7 @@ const MainLayout = ({ children, sx = {} }) => {
         },
       }}
     >
-      <Paper elevation={0} sx={{ p: 2.5, ...sx }}>
+      <Paper elevation={elevation} sx={{ p: 2.5, ...sx }}>
         {children}
       </Paper>
     </Box>

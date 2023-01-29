@@ -37,5 +37,19 @@ namespace ChemistWareHouse.Pizza.Api.Controllers
             _pizzaService.AddPizzaria(location);
             return Ok(new { IsSuccess = true, Message = "Successfully Added" });
         }
+
+        [HttpPost("UpdatePizza", Name = "UpdatePizza")]
+        public IActionResult UpdatePizza(PizzaRequestDto requestDto)
+        {
+            var isUpdated = _pizzaService.UpdatePizza(requestDto);
+            return Ok(new { IsSuccess = isUpdated, Message = isUpdated ? "Successfully Updated" : "Could not update" });
+        }
+
+        [HttpGet("GetAllIngredients", Name = "GetAllIngredients")]
+        public IActionResult GetAllIngredients()
+        {
+            var ingredients = _pizzaService.GetAllIngredients();
+            return Ok(ingredients);
+        }
     }
 }

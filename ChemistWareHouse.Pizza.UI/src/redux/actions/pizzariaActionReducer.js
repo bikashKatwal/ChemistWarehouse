@@ -2,8 +2,8 @@ import { fetchGet, fetchPost } from "../../api";
 
 const REQUEST_PIZZARIA_LOCATION = "REQUEST_PIZZARIA_LOCATION";
 const RESPONSE_PIZZARIA_LOCATION = "RESPONSE_PIZZARIA_LOCATION";
-const REQUEST_PIZZA_MENU_BY_LOCATION = "REQUEST_PIZZA_MENU_BY_LOCATION";
 const RESPONSE_PIZZA_MENU_BY_LOCATION = "RESPONSE_PIZZA_MENU_BY_LOCATION";
+const RESPONSE_PIZZA_INGREDIENTS = "RESPONSE_PIZZA_INGREDIENTS";
 
 export const actionCreators = {
     getLocations: () => async (dispatch) => {
@@ -11,9 +11,16 @@ export const actionCreators = {
         dispatch(actionCreators.getPizzariaLocation());
     },
 
+    getAllIngredients: () => async (dispatch) => {
+        const [, response] = await fetchGet("/Pizza/GetAllIngredients");
+        dispatch({ type: RESPONSE_PIZZA_INGREDIENTS, payload: response });
+    },
+
+
     getPizzariaLocation: () => async (dispatch) => {
         const [, response] = await fetchGet("/Pizza/GetLocations");
         dispatch({ type: RESPONSE_PIZZARIA_LOCATION, payload: response });
+        dispatch(actionCreators.getPizzaMenuByLocation(response[0].locationId))
     },
 
     createLocation: (values) => async (dispatch) => {
@@ -29,12 +36,23 @@ export const actionCreators = {
         const [, response] = await fetchGet(`/Pizza/GetPizzaMenuById/${id}`);
         dispatch({ type: RESPONSE_PIZZA_MENU_BY_LOCATION, payload: response });
     },
+
+    updatePizza: (values) => async (dispatch) => {
+        const [, response] = await fetchPost("/Pizza/UpdatePizza", {
+            ...values
+        });
+        if (response.isSuccess) {
+            dispatch(actionCreators.getPizzaMenuByLocation(values.locationId));
+        }
+    },
+
 };
 
 const initialValue = {
     locations: null,
     pizzaTypes: null,
-    isFetchingData: false
+    ingredients: null,
+    isFetchingData: false,
 };
 
 export const PizzariaReducer = (
@@ -48,6 +66,8 @@ export const PizzariaReducer = (
             return { ...state, isFetchingData: false, locations: payload };
         case RESPONSE_PIZZA_MENU_BY_LOCATION:
             return { ...state, isFetchingData: false, pizzaTypes: payload };
+        case RESPONSE_PIZZA_INGREDIENTS:
+            return { ...state, ingredients: payload };
         default:
             return state;
     }
