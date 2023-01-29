@@ -1,5 +1,5 @@
 const devConfig = {
-    API_DOMAIN: "https://localhost:5000/api"
+    API_DOMAIN: process.env.REACT_APP_BASE_URL
 }
 
 export default devConfig;
